@@ -5,10 +5,10 @@ const Title = (props) => {
       style={{
         padding: '5px 10px',
         borderRadius: '5px',
-        marginTop: '10px',
+        marginTop: '30px',
         display: 'inline-block',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        color: 'white',
+        backgroundColor: '#f0f0f0',
+        color: '#686868',
         fontFamily: 'MinSans-Medium',
         fontWeight: 'lighter',
         fontSize: '16px',

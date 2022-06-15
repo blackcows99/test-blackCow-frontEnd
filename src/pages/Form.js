@@ -118,10 +118,10 @@ const Form = ({ mode }) => {
             placeholder='파일을 선택해주세요.'
             value={fileName || ''}
             _disabled={true}
-            width='50%'
+            width='100%'
           />
 
-          <CustomButton>
+          <CustomButton width='150px'>
             <label htmlFor='file' style={{ cursor: 'pointer' }}>
               파일 찾기
             </label>
@@ -146,27 +146,26 @@ const Form = ({ mode }) => {
               ? fileImage
               : commercial?.img
           }
-          width='80%'
-        ></Image>
+          width='100%'
+          height='auto'
+        />
         <Title text='평점을 선택해주세요.'></Title>
         <Score _onClick={onClickScore} />
       </div>
       <Title text='내용을 입력해주세요'></Title>
       <br />
-      <Input
-        placeholder='제품명을 입력해주세요.'
-        width='50%'
-        // defaultValue={mode === "add" ? "" : commercial?.device}
-        value={mode === 'add' ? inputText : inputText ? inputText : commercial?.device}
-        _onChange={(e) => {
-          setInputText(e.target.value);
-        }}
-      />
-      <Select
-        className='formSelect'
-        _onChange={onChangeSelect}
-        value={commercial?.category}
-      ></Select>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Input
+          placeholder='제품명을 입력해주세요.'
+          width='79%'
+          // defaultValue={mode === "add" ? "" : commercial?.device}
+          value={mode === 'add' ? inputText : inputText ? inputText : commercial?.device}
+          _onChange={(e) => {
+            setInputText(e.target.value);
+          }}
+        />
+        <Select className='formSelect' _onChange={onChangeSelect} value={commercial?.category} />
+      </div>
       <Textarea
         placeholder='내용을 입력해주세요.'
         defaultValue={mode === 'add' ? '' : commercial?.contents}
@@ -176,7 +175,7 @@ const Form = ({ mode }) => {
       />
       {mode === 'add' ? (
         <CustomButton
-          style={{ padding: '10px', width: '100%' }}
+          width='100%'
           _onClick={() => {
             addClick();
           }}
@@ -185,7 +184,7 @@ const Form = ({ mode }) => {
         </CustomButton>
       ) : (
         <CustomButton
-          style={{ padding: '10px', width: '100%' }}
+          width='100%'
           _onClick={() => {
             updateClick();
           }}

@@ -6,13 +6,13 @@ import '../font.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser, loadUserFB } from '../redux/modules/user';
-import {authApi} from "../shared/api";
+import { authApi } from '../shared/api';
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const user = useSelector( state => state.user )        
-  
+  const user = useSelector((state) => state.user);
+
   const [member, setMemeber] = React.useState({});
 
   const signIn = () => {
@@ -21,11 +21,10 @@ const Header = () => {
 
   const signOut = () => {
     // navigate('/login');
-    axios.get('/logout')
-        .then(res=>{
-          setMemeber({});
-          navigate('/login');
-        })
+    axios.get('/logout').then((res) => {
+      setMemeber({});
+      navigate('/login');
+    });
   };
 
   const signUp = () => {
@@ -60,9 +59,9 @@ const Header = () => {
         <button onClick={signIn} style={{ display: user.name == undefined ? '' : 'none' }}>
           로그인
         </button>
-        <button onClick={signUp} style={{ display: user.name == undefined ? '' : 'none' }}>
+        {/* <button onClick={signUp} style={{ display: user.name == undefined ? '' : 'none' }}>
           회원가입
-        </button>
+        </button> */}
         <button onClick={signOut} style={{ display: user.name != undefined ? '' : 'none' }}>
           로그아웃
         </button>

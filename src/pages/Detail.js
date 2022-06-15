@@ -64,8 +64,7 @@ const Detail = ({ data }) => {
   }, []);
 
   return (
-    <>
-      {' '}
+    <div>
       <div style={{ margin: '100px auto 0 auto' }}>
         {/* { commercial.isEditable ? <CustomButton width="10vw" _onClick={() => { navigate(`/update/${commercial?.id}`) }} 
                 style={{display : auth ? "" : "none"}}
@@ -82,6 +81,7 @@ const Detail = ({ data }) => {
           수정하기
         </CustomButton>
         <CustomButton
+          margin='0 10px 0 10px'
           width='10vw'
           _onClick={() => {
             deleteClick(id);
@@ -99,7 +99,8 @@ const Detail = ({ data }) => {
           뒤로가기
         </CustomButton>
       </div>
-      <MyContainer width='60vw'>
+
+      <MyContainer className='form-box' width='60vw' margin='10px auto 0 auto'>
         <TitleBox>
           <strong>{commercial?.member}</strong>
 
@@ -150,7 +151,7 @@ const Detail = ({ data }) => {
         />
         <SideMenu>상세 페이지</SideMenu>
       </MyContainer>
-    </>
+    </div>
   );
 };
 
