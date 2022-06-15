@@ -13,9 +13,9 @@ const Login = () => {
 
                 <label>비밀번호</label>
                 <Input placeholder="비밀번호를 입력하세요." />
-                
+
                 <CustomButton width="100%">로그인</CustomButton>
-                <CustomButton _onClick={()=>{window.location.href="http://idontcare.shop/oauth2/authorization/kakao"}} >카카오 로그인</CustomButton>
+                <CustomButton _onClick={() => { window.location.href = "http://idontcare.shop/oauth2/authorization/kakao" }} >카카오 로그인</CustomButton>
             </MyContainer>
         </>
     );

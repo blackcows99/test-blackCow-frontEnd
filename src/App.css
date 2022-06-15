@@ -1,80 +1,76 @@
+/** @format */
+
 @font-face {
-  font-family: 'EliceDigitalBaeum_Bold';
-  src: url('./fonts/EliceDigitalBaeum_Bold.ttf');
+   font-family: 'EliceDigitalBaeum_Bold';
+   src: url('./fonts/EliceDigitalBaeum_Bold.ttf');
 }
 @font-face {
-  font-family: 'EliceDigitalBaeum_Regular';
-  src: url('./fonts/EliceDigitalBaeum_Regular.ttf');
+   font-family: 'EliceDigitalBaeum_Regular';
+   src: url('./fonts/EliceDigitalBaeum_Regular.ttf');
 }
 
 /* *{
   font-family: "EliceDigitalBaeum_Bold";
 } */
 .start {
-  opacity: 0;
+   opacity: 0;
 }
 .end {
-  opacity: 1;
-  transition: opacity 0.5s;
+   opacity: 1;
+   transition: opacity 0.5s;
 }
 
 .App {
-  text-align: center;
+   text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+   height: 40vmin;
+   pointer-events: none;
 }
 
-
 @media screen and (min-width: 1024px) {
- 
 }
 /* --/-tablet(768px~1024px)--- */
 @media screen and (min-width: 768px) and (max-width: 840px) {
-  
 }
- /* ---mobile(320px~480px)--- */
-@media screen and (max-width: 768px) and ( min-width: 412px ) {   /* 태블릿사이즈보다 작아지면 바로 적용되도록 */
- *{
-   font-size: 0.9rem;
- }
+/* ---mobile(320px~480px)--- */
+@media screen and (max-width: 768px) and (min-width: 412px) {
+   /* 태블릿사이즈보다 작아지면 바로 적용되도록 */
+   * {
+      font-size: 0.9rem;
+   }
 }
-
 .formSelect {
-  border: 10px solid red ;
+   border: 10px solid red;
 }
-
-
-
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+   .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+   }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+   background-color: #282c34;
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   font-size: calc(10px + 2vmin);
+   color: white;
 }
 
 .App-link {
-  color: #61dafb;
+   color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+   from {
+      transform: rotate(0deg);
+   }
+   to {
+      transform: rotate(360deg);
+   }
 }
