@@ -29,7 +29,7 @@ const Form = ({ mode }) => {
     const getData = async () => {
         let data;
         let file_url;
-        if ( fileInput.current.files[0] ) {
+        if (fileInput.current.files[0]) {
             const file = fileInput.current.files[0];             // 복잡한 파일 담겨있음 변환 필요
             const uploaded_file = await uploadBytes(
                 ref(storage, `images/${file.name}`),// 파일이름
@@ -41,9 +41,9 @@ const Form = ({ mode }) => {
             device: inputText ? inputText : commercial?.device,
             contents: areaText ? areaText : commercial?.contents,
             category:
-            mode === "add" ? (selected ? selected 
-            : commercial?.category ? commercial?.category : 1 )
-            : selected ? selected : 1,
+                mode === "add" ? (selected ? selected
+                    : commercial?.category ? commercial?.category : 1)
+                    : selected ? selected : 1,
             score: rating ? rating : commercial?.score,
             img: file_url ? file_url : commercial?.img,
             // member: user[0].name,
@@ -51,24 +51,31 @@ const Form = ({ mode }) => {
         return data;
     }
 
-    
+    // const dataValueCheck = ( data ) => {
+    //     console.log( data ) 
+    //     if ( !(data.device && data.contents && data.score && data.img) ){
+    //         alert('모든 값을 다 입력해주세요.')
+    //         return;
+    //     }
+    // }
+
     const addClick = () => {
         getData().then(res => {
-            console.log(res)
+            if (!(res.device && res.contents && res.score && res.img)) {
+                alert('모든 값을 다 입력해주세요.')
+                return;
+            }
             // postApi.addPost(res)
             dispatch(createPostFB(res));
-            
             navigate(-1);
         });
     }
-      const updateClick = () => {
-          getData().then(res=>{
-              console.log(res)
+    const updateClick = () => {
+        getData().then(res => {
             dispatch(updatePostFB(id, res));
-        //   postApi.updatePost(commercial.id,res);
-        // dispatch(updateCommercial(_data));  
-          navigate("/");
-          });
+            //   postApi.updatePost(commercial.id,res);
+            navigate("/");
+        });
     }
 
     const call = async () => {
@@ -96,9 +103,9 @@ const Form = ({ mode }) => {
         setSelected(e.target.value);
     }
 
-   
 
 
+    console.log(document.getElementsByClassName(".formSelect"))
     return (
         <MyContainer width="60vw">
             <Title text="이미지를 선택해주세요."></Title>
@@ -107,7 +114,7 @@ const Form = ({ mode }) => {
                     <Input
                         placeholder="파일을 선택해주세요."
                         value={fileName || ""}
-                        disabled
+                        _disabled={true}
                         width="50%"
                     />
 
@@ -122,23 +129,26 @@ const Form = ({ mode }) => {
                     style={{ display: "none" }}
                     onChange={selectFile}
                 />
-
-                <Image src={mode === "add" ?
-                    (fileImage ? fileImage : null)
-                    : (fileImage ? fileImage : commercial?.img)}>
+                    <Image
+                        src={mode === "add" ?
+                            (fileImage ? fileImage : null)
+                            : (fileImage ? fileImage : commercial?.img)}
+                        width="80%"
+                    >
                 </Image>
                 <Title text="평점을 선택해주세요."></Title>
-                <Score _onClick={ onClickScore }/>
+                <Score _onClick={onClickScore} />
             </div>
             <Title text="내용을 입력해주세요"></Title><br />
             <Input
                 placeholder="제품명을 입력해주세요."
                 width="50%"
                 // defaultValue={mode === "add" ? "" : commercial?.device}
-                value ={mode === "add" ? null: ( inputText ? inputText : commercial?.device) }
+                value={mode === "add" ? inputText : (inputText ? inputText : commercial?.device)}
                 _onChange={(e) => { setInputText(e.target.value) }}
             />
             <Select
+                className="formSelect"
                 _onChange={onChangeSelect}
                 value={commercial?.category}>
             </Select>

@@ -36,7 +36,7 @@ const TabContent = ({ data,onClick,content,setContent,auth }) => {
                     />
                     <CustomButton _onClick={ onClick } width="15%">등록</CustomButton>
 
-                    {data.map((d, i) => {
+                    {data?.map((d, i) => {
                         return (
                         // <div
                         //     key={i}

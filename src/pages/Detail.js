@@ -12,7 +12,6 @@ import { deletePostFB } from '../redux/modules/post';
 const Detail = ({ data }) => {
   const dispatch = useDispatch();
   const comments = useSelector((state) => state.comment.list);
-  console.log(comments);
   const { id } = useParams();
   const navigate = useNavigate();
   const [commercial, setCommercial] = useState(null);

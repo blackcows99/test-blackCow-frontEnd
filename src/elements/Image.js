@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
 const Image = (props) => {
-    const { width, height, src } = props;
-    const styles = { width, height, src };
+    const { width, height, src, size } = props;
+    const styles = { width, height, src,size };
     return (
         <ImageBox {...styles} />
     )
@@ -15,6 +15,11 @@ Image.defaultProps = {
 };
 
 const ImageBox = styled.img`
+    --size: ${(props) => props.size}px;
+    width: var(--size);
+    height: var(--size);
+    min-width: var(--size);
+    min-height: var(--size);
     ${(props) => (props.width ? `width: ${props.width};` : `width: 100%;`)}
     ${(props) => (props.height ? `height: ${props.height};` : `height: 50vh;`)}
     background-size: cover;

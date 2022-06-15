@@ -15,7 +15,6 @@ const CustomButton = (props) => {
         height,
         margin,
         };
-console.log(_disabled)
     return (
         <Button 
             // {...styles}

@@ -213,11 +213,11 @@
     {
       "id": 2,
       "member": "member3",
-      "contents": "ㅋㅋ",
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EA%B7%B8%EB%A6%BC1.png?alt=media&token=372024fd-78f7-4d00-949e-78214c4c63af",
-      "device": "ㅋㅋ",
+      "contents": "ㅋㅋㅋㅋㅋㅋ",
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20(1).jpg?alt=media&token=51e95ef2-afed-4fd0-b50f-68ff6576e0eb",
+      "device": "ㅋㅋㅋㅋㅋㅋ",
       "category": "2",
-      "score": 2,
+      "score": 1,
       "date": "2022-12-03",
       "comments": [
         {
@@ -385,6 +385,28 @@
       "score": 3,
       "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpg?alt=media&token=3dbbc955-9110-478e-9cbb-ff4cca69526a",
       "id": 13
+    },
+    {
+      "device": "df",
+      "contents": "df",
+      "category": 1,
+      "id": 14
+    },
+    {
+      "category": 1,
+      "id": 15
+    },
+    {
+      "category": 1,
+      "id": 16
+    },
+    {
+      "device": "테스트!!",
+      "contents": "테스트!!",
+      "category": 1,
+      "score": 4,
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpg?alt=media&token=2e6e2d48-6734-4ea9-a7ba-ba50c15005f3",
+      "id": 17
     }
   ]
 }

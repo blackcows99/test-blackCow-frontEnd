@@ -95,7 +95,7 @@ const Container = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
   gap: 15px 10px;
-
+  
   justify-items: center;
 `;
 
