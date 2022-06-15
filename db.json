@@ -27,11 +27,11 @@
   "api_post": [
     {
       "id": "1",
-      "device": "id가 1인 데이터aadddddda",
-      "contents": "ㄹㅇaaddddddddaa",
-      "category": "2",
-      "score": 3,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EA%B7%B8%EB%A6%BC1.png?alt=media&token=0576f6d6-6b9f-4f7d-8ad2-7f233dbaac0d",
+      "device": "device2",
+      "contents": "content2",
+      "category": 1,
+      "score": 2,
+      "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032509540448772796294379_265.jpg",
       "member": "멤버1",
       "date": "2011-01-01",
       "comments": [
@@ -186,22 +186,22 @@
     {
       "id": 1,
       "member": "member2",
-      "contents": "content2",
-      "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032509540448772796294379_265.jpg",
-      "device": "device2",
-      "category": "2",
-      "score": "2",
+      "contents": "반갑습니당",
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20(1).jpg?alt=media&token=a868a8c3-0e96-4dd4-8742-6735da9175cf",
+      "device": "안뇽하세요",
+      "category": 1,
+      "score": 3,
       "date": "2022-12-02",
       "comments": [
         {
           "id": "1",
           "member": "member4",
-          "comment": "댓글4"
+          "comment": "댓글444444444444444444444444444444444444"
         },
         {
           "id": "2",
           "member": "member5",
-          "comment": "댓글5"
+          "comment": "댓글55"
         },
         {
           "id": "3",
@@ -213,11 +213,11 @@
     {
       "id": 2,
       "member": "member3",
-      "contents": "content3",
-      "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032509540448772796294379_265.jpg",
-      "device": "device3",
-      "category": "3",
-      "score": "3",
+      "contents": "ㅋㅋ",
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EA%B7%B8%EB%A6%BC1.png?alt=media&token=372024fd-78f7-4d00-949e-78214c4c63af",
+      "device": "ㅋㅋ",
+      "category": "2",
+      "score": 2,
       "date": "2022-12-03",
       "comments": [
         {
@@ -342,6 +342,49 @@
           "comment": "댓글6"
         }
       ]
+    },
+    {
+      "device": "d",
+      "contents": "d",
+      "score": 2,
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20(1).jpg?alt=media&token=9dd4edba-5700-4223-bf8f-57cd779a47bf",
+      "id": 7
+    },
+    {
+      "device": "zz",
+      "contents": "zz",
+      "category": "5",
+      "score": 5,
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20(1).jpg?alt=media&token=e6c72ec4-7ef3-40ae-b59e-c0d0ae25b1b8",
+      "id": 8
+    },
+    {
+      "device": "z",
+      "contents": "z",
+      "category": 1,
+      "score": 5,
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EA%B7%B8%EB%A6%BC1.png?alt=media&token=bd99798d-7427-47d2-9708-0739d2d4ebb0",
+      "id": 9
+    },
+    {
+      "category": "4",
+      "id": 10
+    },
+    {
+      "category": 1,
+      "id": 11
+    },
+    {
+      "category": "3",
+      "id": 12
+    },
+    {
+      "device": "ㅎㅎ",
+      "contents": "ㅎㅎ",
+      "category": 1,
+      "score": 3,
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpg?alt=media&token=3dbbc955-9110-478e-9cbb-ff4cca69526a",
+      "id": 13
     }
   ]
 }

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from "styled-components";
-import { Input, CustomButton } from '../elements';
-import { postApi } from '../shared/api';
+import { Input, CustomButton, MyContainer } from '../elements';
+import { deleteCommentFB } from '../redux/modules/comment';
 const TabContent = ({ data,onClick,content,setContent,auth }) => {
     const [fade, setFade] = useState('');
     const [tab, setTab] = useState(false);
-    // const [comments, setComments] = useState(data);
-    const [inputText, setInputText] = useState("");
+    const dispatch = useDispatch();
+    
     React.useEffect(() => {
         const a = setTimeout(() => { setFade('end') }, 10)
         return () => { setFade(''); clearTimeout(a) }
@@ -15,14 +16,11 @@ const TabContent = ({ data,onClick,content,setContent,auth }) => {
         setTab(!tab);
     }
     // console.log(data)
-
+    
 
     const deleteComment = (id) => {
-        postApi.deleteComment(id);
+        dispatch(deleteCommentFB(id))
     }
-
-    React.useEffect(()=>{
-    },[])
 
     return (
         <div className={`start ${fade}`}>
@@ -40,20 +38,31 @@ const TabContent = ({ data,onClick,content,setContent,auth }) => {
 
                     {data.map((d, i) => {
                         return (
-                        <div
-                            key={i}
-                            style={{
-                                display: "flex",
-                                textAlign: "center",
-                                alignItems:"center",
-                            }}>
-                            <strong style={{ flexGrow: "1"}}>{d.member}</strong>
-                            <div style={{ flexGrow: "2", textAlign: "center" }}>{d.comment}</div>
-                            {auth && <CustomButton _onClick={()=>{deleteComment(i+1)}}>삭제</CustomButton>}
-                            <Line />
-                        </div>)
+                        // <div
+                        //     key={i}
+                        //     style={{
+                        //         display: "flex",
+                        //         textAlign: "center",
+                        //         alignItems:"center",
+                        //         border:"1px solid black",
+                        //         padding:"5px"
+                        //     }}>
+                        <MyContainer key={i} is_flex padding="10px" >
+                            <span>{d.member}</span>
+                            <div style={{width:"50%",wordBreak:"break-all"}} >{d.comment}</div>
+                            <div>
+                                {d.isDeleteable ? 
+                                <CustomButton 
+                                _onClick={()=>{deleteComment(d.id)}} 
+                                width="7vw" padding="0"
+                                >
+                                    삭제</CustomButton>
+                                : null}  
+                            </div>
+                        </MyContainer>
+                        // </div>)
 
-                    })}
+                    )})}
 
                 </>
                 : null}

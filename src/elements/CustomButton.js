@@ -7,6 +7,7 @@ const CustomButton = (props) => {
         width,
         height,
         margin,
+        _disabled,
     } = props;
 
     const styles = {
@@ -14,12 +15,13 @@ const CustomButton = (props) => {
         height,
         margin,
         };
-
+console.log(_disabled)
     return (
         <Button 
             // {...styles}
             onClick={_onClick}
             style = { {width, height, margin}}
+            disabled={_disabled}
             >
             {children}
             
@@ -31,6 +33,7 @@ CustomButton.defaultProps = {
     _onChange: () => {},
     _onSubmit: () => {},
     _onClick: () => {},
+    _disabled: false,
     width: false,
     height: false,
     margin: false,

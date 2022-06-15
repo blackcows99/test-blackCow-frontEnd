@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const MyContainer = (props) => {
+    
     const {
         children,
         is_flex,
@@ -12,7 +13,6 @@ const MyContainer = (props) => {
         _onClick,
         is_main,
     } = props;
-
     const styles = {
         is_flex,
         width,
@@ -47,7 +47,14 @@ const Container = styled.div`
     box-shadow: 5px 5px 5px rgba(108,117,125,0.3);
     text-align: left;
     padding: 50px;
-    position: relative;
+    ${(props) =>
+        props.is_flex
+          ? `display: flex; justify-content: space-between; align-items: center;`
+          : ""};
+      ${(props) => (props.padding ? `padding: ${props.padding};` : "")};
+      ${(props) => (props.margin ? `margin: ${props.margin};` : "")};
+      ${(props) => (props.bg ? `background-color: ${props.bg};` : "")};
+      ${(props) => (props.relative ? `position: relative;` : "")};
 `;
 
 export default MyContainer;
