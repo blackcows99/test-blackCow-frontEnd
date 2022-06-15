@@ -5,15 +5,15 @@ import PostList from '../components/PostList';
 import CreateIcon from '@mui/icons-material/Create';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {authApi} from "../shared/api";
+import { authApi } from '../shared/api';
 import { useSelector } from 'react-redux';
 import { loadUserFB } from '../redux/modules/user';
 const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [auth,setAuth] = React.useState(false);
-  const user = useSelector( state => state.user)
-  
+  const [auth, setAuth] = React.useState(false);
+  const user = useSelector((state) => state.user);
+
   // 탭 메뉴 구현 부분
   const [activeIndex, setActiveIndex] = React.useState(0);
   // const focus = useIsFocused();
@@ -125,11 +125,18 @@ const Main = () => {
         })}
       </TabMenu>
       <div>{tabArr[activeIndex].tabContent}</div>
-      <WriteBtn
+      {/* <WriteBtn
         onClick={() => {
           navigate('/add');
         }}
         style={{display:user.name?'':'none'}}
+      >
+        <CreateIcon style={{ color: '#ffd5d5' }} />
+      </WriteBtn> */}
+      <WriteBtn
+        onClick={() => {
+          navigate('/add');
+        }}
       >
         <CreateIcon style={{ color: '#ffd5d5' }} />
       </WriteBtn>
@@ -170,6 +177,13 @@ const TabMenu = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  & button {
+    
+
+    @media screen and (max-width: 500px) {
+      font-size: 12px;
+  }
 
   & button:hover {
     cursor: pointer;
