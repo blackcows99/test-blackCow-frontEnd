@@ -11,11 +11,10 @@ const authApi = {
         RESP.LOGIN.user.push(data);
         console.log(RESP.LOGIN.user);
     },
-    authCheck: (onsuccess,onerror)=>{
-        axios
-            .get('/api_member')
-            .then(onsuccess)
-            .catch(onerror);
+    authCheck: async (onsuccess,onerror)=>{
+        return await axios
+            .get('/api/member');
+
     }
     
 };
@@ -23,7 +22,7 @@ const authApi = {
 const postApi = {
     loadPost: async () => {
         return await axios
-            .get('/api_posts')
+            .get('/api/posts')
             // .get('/api/post')
             .then((response) => {
                 // console.log('완료!');
@@ -37,7 +36,7 @@ const postApi = {
 
     addPost: async (data) => {
         await axios
-            .post('/api_posts', data)
+            .post('/api/post', data)
             .then((res) => {
                 alert('등록 완료!');
             })
@@ -48,7 +47,7 @@ const postApi = {
 
     loadOnePost: async (id) => {
         return await axios
-            .get(`/api_posts/${id}`)
+            .get(`/api/post/${id}`)
             .then((res) => {
                 return res.data;
             })
@@ -60,7 +59,7 @@ const postApi = {
 
     updatePost: async (id, data) => {
         await axios
-            .patch(`/api_posts/` + id, data)
+            .patch(`/api/post/` + id, data)
             .then((res) => {
                 alert('업데이트 완료!');
             })
@@ -70,7 +69,7 @@ const postApi = {
     },
 
     deletePost:  async (id) => {
-        await axios.delete(`/api_posts/`+ id)
+        await axios.delete(`/api/post/`+ id)
         .then((res) => {
             alert('post 삭제 완료!');
         })
@@ -82,7 +81,7 @@ const postApi = {
     addComment: async (id, data) => {
         console.log(id, data)
         await axios
-            .post(`/api_comment/` +id, data)
+            .post(`/api/comment/` +id, data)
             .then((res) => {
                 alert('코멘트 등록 완료!');
             })
@@ -92,7 +91,7 @@ const postApi = {
     },
     
     deleteComment:  async (id) => {
-        await axios.delete(`/api_comment/`+ id)
+        await axios.delete(`/api/comment/`+ id)
         .then((res) => {
             alert('코멘트 삭제 완료!');
         })

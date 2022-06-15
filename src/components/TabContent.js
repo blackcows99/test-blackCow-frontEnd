@@ -51,7 +51,7 @@ const TabContent = ({ data,onClick,content,setContent,auth }) => {
                             <span>{d.member}</span>
                             <div style={{width:"50%",wordBreak:"break-all"}} >{d.comment}</div>
                             <div>
-                                {d.isDeleteable ? 
+                                {d.deleteable ?
                                 <CustomButton 
                                 _onClick={()=>{deleteComment(d.id)}} 
                                 width="7vw" padding="0"

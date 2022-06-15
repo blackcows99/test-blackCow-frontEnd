@@ -60,7 +60,7 @@ const Detail = ({ data }) => {
   };
   React.useEffect(() => {
     call();
-    authCheck();
+    // authCheck();
   }, []);
 
   return (
