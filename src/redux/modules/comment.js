@@ -32,15 +32,15 @@ export function addComment(comment) {
 
 export const addCommentFB = (id, comment) => {
     return async function (dispatch) {  
-        // const comments = await postApi.addComment(id, comment);     // 실전에서 풀기 
-        const comments = RESP.COMMENTS[0];  // 테스트 코드
+        const comments = await postApi.addComment(id, comment);     // 실전에서 풀기
+        // const comments = RESP.COMMENTS[0];  // 테스트 코드
         dispatch(addComment(comments))
     }
 }
 
 export const deleteCommentFB = (id) => {
     return async function (dispatch, getState) {
-        // postApi.deleteComment(id);
+        postApi.deleteComment(id);
         dispatch(deleteComment(id));
 
 

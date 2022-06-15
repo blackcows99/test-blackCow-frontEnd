@@ -56,7 +56,7 @@ export const updatePostFB = (id, post) => {
 export const deletePostFB = (id) => {
     return async function (dispatch, getState) {
         console.log(id);
-        // postApi.deletePost(id);         실전에서 주석 풀기
+        postApi.deletePost(id);        // 실전에서 주석 풀기
         dispatch(deletePost(id))
     }}
 
