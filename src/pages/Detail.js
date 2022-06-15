@@ -66,7 +66,7 @@ const Detail = ({ data }) => {
   return (
     <>
       {' '}
-      <div style={{ margin: '70px auto 0 auto' }}>
+      <div style={{ margin: '100px auto 0 auto' }}>
         {/* { commercial.isEditable ? <CustomButton width="10vw" _onClick={() => { navigate(`/update/${commercial?.id}`) }} 
                 style={{display : auth ? "" : "none"}}
             >수정하기</CustomButton> : null} */}

@@ -27,27 +27,28 @@
   pointer-events: none;
 }
 
-
 @media screen and (min-width: 1024px) {
- 
 }
 /* --/-tablet(768px~1024px)--- */
 @media screen and (min-width: 768px) and (max-width: 840px) {
-  
 }
- /* ---mobile(320px~480px)--- */
-@media screen and (max-width: 768px) and ( min-width: 412px ) {   /* 태블릿사이즈보다 작아지면 바로 적용되도록 */
- *{
-   font-size: 0.9rem;
- }
+/* ---mobile(320px~480px)--- */
+@media screen and (max-width: 768px) and (min-width: 412px) {
+  /* 태블릿사이즈보다 작아지면 바로 적용되도록 */
+  /* * {
+    font-size: 0.9rem;
+  } */
+}
+
+/* 글쓰기 페이지 */
+.form-box {
+  min-width: 600px;
+  border-radius: 5px;
 }
 
 .formSelect {
-  border: 10px solid red ;
+  border: 10px solid red;
 }
-
-
-
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

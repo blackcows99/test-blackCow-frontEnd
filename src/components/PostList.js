@@ -23,7 +23,7 @@ const PostList = (props) => {
   useEffect(() => {
     // test();
     dispatch(loadPostFB());
-  }, []);
+  }, [dispatch]);
 
   // 탭 버튼 클릭에 따른 데이터
   const tabContent = postList.filter((x) => {
@@ -95,7 +95,7 @@ const Container = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
   gap: 15px 10px;
-  
+
   justify-items: center;
 `;
 
