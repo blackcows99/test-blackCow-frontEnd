@@ -32,7 +32,7 @@ export function addComment(comment) {
 
 export const addCommentFB = (id, comment) => {
     return async function (dispatch) {  
-        // postApi.addComment(id, comment);     // 실전에서 풀기 
+        // const comments = await postApi.addComment(id, comment);     // 실전에서 풀기 
         const comments = RESP.COMMENTS[0];  // 테스트 코드
         dispatch(addComment(comments))
     }
@@ -55,7 +55,10 @@ export default function reducer(state = initialState, action = {}) {
         }
   
         case "comment/ADD": {
-            return { list: [...state.list, action.comment] }; 
+            if ( state.list )
+                return { list: [...state.list, action.comment] }; 
+            else
+                return { list: [ action.comment] }; 
         }
   
         case "comment/DELETE": {

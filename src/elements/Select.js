@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import React from 'react';
-const Select = ( { _onChange,value } ) => {
+const Select = ( { _onChange, value, className } ) => {
     return (
-        <SelectBox onChange={_onChange}  dafaultValue={value}>
+        <SelectBox 
+        onChange={_onChange}  
+        dafaultValue={value}
+        className={className}
+        >
             <option value="1" >컴퓨터</option>   {/* value 값이 서버로 넘어감 */}
             <option value="2" >노트북</option>
             <option value="3" >웨어러블</option>
@@ -15,13 +19,12 @@ const Select = ( { _onChange,value } ) => {
 
 
 const SelectBox = styled.select`
-    margin-left : 10px;
     outline : none;
     border: 2px solid rgba(108,117,125,0.3);
     border-radius: 5px;
     height : 45px;
     transition : .5s;
-    width : 20vw;
+    width : 40%;
     &:focus {
         border: 2px solid rgba(108,117,125,0.8);
     }

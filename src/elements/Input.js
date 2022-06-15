@@ -12,7 +12,6 @@ const Input = (props) => {
         width,
         value,
     } = props;
-    console.log(value)
     const styles = {
         label,
         margin,
