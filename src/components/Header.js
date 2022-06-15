@@ -4,16 +4,21 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../font.css';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { loadUser } from '../redux/modules/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadUser, loadUserFB } from '../redux/modules/user';
 import {authApi} from "../shared/api";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const user = useSelector( state => state.user )        
+  
   const [member, setMemeber] = React.useState({});
+
   const signIn = () => {
     navigate('/login');
   };
+
   const signOut = () => {
     // navigate('/login');
     axios.get('/logout')
@@ -22,19 +27,19 @@ const Header = () => {
           navigate('/login');
         })
   };
+
   const signUp = () => {
     navigate('/sign_up');
   };
+
   const getMemberInfo = async () => {
-    
-    authApi.authCheck((response) => {
-      setMemeber(response.data);
-      // setMemeber(...response.data);
-      // dispatch(loadUser(...response.data));
-    },(error) => {
-      console.log(error);
-      setMemeber({});
-    })
+    dispatch(loadUserFB());
+    // authApi.authCheck((response) => {
+    //   setMemeber(response.data);
+    // },(error) => {
+    //   console.log(error);
+    //   setMemeber({});
+    // })
   };
 
   React.useEffect(() => {
@@ -51,14 +56,14 @@ const Header = () => {
         BlackCow
       </h1>
       <div>
-        <p>{member.name == undefined ? '' : member.name + '님, 안녕하세요!'}</p>
-        <button onClick={signIn} style={{ display: member.name == undefined ? '' : 'none' }}>
+        <p>{user.name == undefined ? '' : user.name + '님, 안녕하세요!'}</p>
+        <button onClick={signIn} style={{ display: user.name == undefined ? '' : 'none' }}>
           로그인
         </button>
-        <button onClick={signUp} style={{ display: member.name == undefined ? '' : 'none' }}>
+        <button onClick={signUp} style={{ display: user.name == undefined ? '' : 'none' }}>
           회원가입
         </button>
-        <button onClick={signOut} style={{ display: member.name != undefined ? '' : 'none' }}>
+        <button onClick={signOut} style={{ display: user.name != undefined ? '' : 'none' }}>
           로그아웃
         </button>
       </div>

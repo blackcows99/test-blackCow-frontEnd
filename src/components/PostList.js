@@ -1,19 +1,13 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import StarIcon from '@mui/icons-material/Star';
-import axios from 'axios';
-
-import { async } from '@firebase/util';
-import { postApi } from '../shared/api';
-import { loadCommercial } from '../redux/modules/Commercial';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loadWordFB } from '../redux/modules/post';
+import { loadPostFB } from '../redux/modules/post';
 
 const PostList = (props) => {
   const navigate = useNavigate();
   const postList = useSelector( state => state.post.list);
-  console.log(postList)
   const [star, setStar] = React.useState([0, 1, 2, 3, 4]);
   // const [postData, setPostData] = React.useState([]);
   const [category, setCategory] = React.useState([
@@ -39,7 +33,7 @@ const PostList = (props) => {
 
   useEffect(() => {
     // test();
-    dispatch(loadWordFB());
+    dispatch(loadPostFB());
   }, []);
 
   // 탭 버튼 클릭에 따른 데이터

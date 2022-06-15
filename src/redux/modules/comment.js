@@ -1,85 +1,72 @@
 import axios from "axios";
 import { postApi } from "../../shared/api";
-
+import RESP from "../../shared/response";
 
 // Actions
-const CREATE = 'comment/CREATE';
+const LOAD = 'comment/LOAD';
 const DELETE = 'comment/DELETE';
-
+const ADD = 'comment/ADD';
 const initialState = {
     list: [
         
     ],
 };
-// 미들웨어 Actions
 
 // Action Creators
-export function createComment(comment) {
-    return { type: CREATE, comment };
+export function loadComment(comments) {
+    return { type: LOAD, comments };
 }
-export function deleteComment(idx) {   
-    return { type: DELETE, idx };   
+export function deleteComment(id) {   
+    return { type: DELETE, id };   
 }
 
 // 미들웨어 Action Creators
-// export function loadPost(posts) {
-//     return { type: LOAD, posts };
-// }
+export function addComment(comment) {
+    return { type: ADD, comment };
+}
 
 
 // middlewares,  리덕스와 파이어베이스랑 통신하는 부분= redux thunk
 
 
-export const createCommentFB = (comment) => {
+
+export const addCommentFB = (id, comment) => {
     return async function (dispatch) {  
-        postApi.addPost(comment)
-        dispatch(createComment(comment))
-        // const word = { id: docRef.id, ...word_data };       // 리덕스에만 id가 저장됨 ?         
-        // dispatch(createWord(word))
-        // console.log((await getDoc(docRef)).data()) 
-        // const _word = await getDoc(docRef);                      // 방법2, 기다릴 필요 없다.
-        // const word = {id:_word.id, ..._word.data()};           
-        // dispatch(createWord(word))
+        // postApi.addComment(id, comment);     // 실전에서 풀기 
+        const comments = RESP.COMMENTS[0];  // 테스트 코드
+        dispatch(addComment(comments))
     }
 }
 
 export const deleteCommentFB = (id) => {
     return async function (dispatch, getState) {
-        // if (!id){
-        //     window.alert("아이디가 없네요");
-        //     return;
-        // }
-      
-        // const word_list = getState().word.list; // 기존 state 데이터 다 가져오기
-        // const word_index = word_list.findIndex((w) => {
-        //     return w.id === id;
-        // })
-        // console.log(word_index)
-        // dispatch(deleteWord(word_index))
-
-
+        // postApi.deleteComment(id);
+        dispatch(deleteComment(id));
 
 
     }
 }
 
-
-
-
-
-// Reducer                        //이전 값              
-export default function reducer(state = initialState, action = {}) { //기존거 없애고,새로운거 추가하는 개념
+// Reducer                        
+export default function reducer(state = initialState, action = {}) { 
     switch (action.type) {
-        case "comment/CREATE": {
-            return { list: [...state.list, action.comment] }; // 새로운 배열 리턴
+        case "comment/LOAD": {
+            return { list: action.comments }
+        }
+  
+        case "comment/ADD": {
+            return { list: [...state.list, action.comment] }; 
         }
   
         case "comment/DELETE": {
-            const new_word_list = state.list.filter((v, i) => {
-                return parseInt(action.idx) !== i
+            console.log(action.id)
+            const new_comment_list = state.list.filter((c) => {
+                console.log(c.id)
+                return parseInt(action.id) !== parseInt(c.id); //  실전에선 c.id 의 parseInt 뺴기
             });
-            // console.log({ list: new_word_list })
-            return { list: new_word_list, is_loaded:true };
+            console.log(new_comment_list)
+            console.log({ list: new_comment_list })
+            return { list: new_comment_list };
         }
         default: return state;
     }

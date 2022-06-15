@@ -5,23 +5,23 @@ import { TabContent } from '../components';
 import { BsStarFill } from 'react-icons/bs';
 import { useNavigate, useParams } from 'react-router-dom';
 import { authApi, postApi } from '../shared/api';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadComment, addCommentFB } from '../redux/modules/comment';
+import { deletePostFB } from '../redux/modules/post';
 const Detail = ({ data }) => {
-    // const post = useSelector( state => state.post.list);
-    const params = useParams();
+    const dispatch = useDispatch();
+    const comments = useSelector( state => state.comment.list);
+    console.log(comments)
+    const { id } = useParams();
     const navigate = useNavigate();
-    const id = params.id;
     const [commercial, setCommercial] = useState(null);
-    const [comments, setComments] = useState([]);
+    // const [comments, setComments] = useState([]);
     const [content,setContent] = useState('');
     const [auth, setAuth] = useState(false);
 
-    const call = async () => {
-        const data = await postApi.loadOnePost(id);
-        setCommercial(data);
-        setComments(data.comments);
-        console.log(comments)
-    }
+
+
+    
 
     const authCheck = async () => {
         authApi.authCheck(response => {
@@ -30,17 +30,35 @@ const Detail = ({ data }) => {
             console.log(error);
           })
     }
+
+    // handleClick 관련 테스트 코드 ////////
+    // const user = useSelector ( state => state.user)
+    ///////////////////////////////////////
     const handleComment = async () => {
         const _data = {
             comment: content,
+            // name: user.name,
         }
-        const response = await postApi.addComment(id, _data)
-        console.log(response);
+        if ( !content ){
+            alert('댓글을 입력하세요!')
+            return;
+        }
+        dispatch(addCommentFB(id, _data))
         setContent('');
-        console.log(comments)
-        call();
+        // call();
     }
 
+    const deleteClick = (id) => {
+        dispatch(deletePostFB(id));
+        navigate(-1);
+    }
+    const call = async () => {
+        const data = await postApi.loadOnePost(id);
+        dispatch(loadComment(data.comments));
+        setCommercial(data);
+        // setComments(data.comments);
+        // console.log(comments)
+    }
     React.useEffect(() => {
         call();
         authCheck()
@@ -48,9 +66,18 @@ const Detail = ({ data }) => {
 
     return (
         <>  <div style={{ margin:"70px auto 0 auto"}}>
+            {/* { commercial.isEditable ? <CustomButton width="10vw" _onClick={() => { navigate(`/update/${commercial?.id}`) }} 
+                style={{display : auth ? "" : "none"}}
+            >수정하기</CustomButton> : null} */}
+            
+
+            {/* 실전에서 밑에 버튼 지우고 위에꺼 주석풀기 */}
             <CustomButton width="10vw" _onClick={() => { navigate(`/update/${commercial?.id}`) }} 
                 style={{display : auth ? "" : "none"}}
             >수정하기</CustomButton>
+            <CustomButton width="10vw" _onClick={() => { deleteClick(id);}} 
+                style={{display : auth ? "" : "none"}}
+            >삭제하기</CustomButton>
             <CustomButton width="10vw"_onClick={() => { navigate(-1) }}>뒤로가기</CustomButton>
             </div>
             <MyContainer width="60vw">
@@ -65,7 +92,7 @@ const Detail = ({ data }) => {
                     <Image src={commercial?.img} width="50%"></Image>
                     <div style={{ padding: "10px" }}>
                         <p><strong style={{ fontSize: "1.1rem" }}>{commercial?.device}</strong></p>
-                        <p>{commercial?.contents}</p>
+                        <p style={{wordBreak:"break-all"}} >{commercial?.contents}</p>
                     </div>
                 </ContentBox>
                 <Center>

@@ -59,8 +59,8 @@ const postApi = {
 
 
     updatePost: async (id, data) => {
-        return await axios
-            .patch(`/api_post/` + id, data)
+        await axios
+            .patch(`/api_posts/` + id, data)
             .then((res) => {
                 alert('업데이트 완료!');
             })
@@ -68,9 +68,20 @@ const postApi = {
                 alert(error.response.data);
             });
     },
+
+    deletePost:  async (id) => {
+        await axios.delete(`/api_posts/`+ id)
+        .then((res) => {
+            alert('post 삭제 완료!');
+        })
+        .catch((error) => {
+            alert('에러 발생!');
+        });
+    },
+
     addComment: async (id, data) => {
         console.log(id, data)
-        return await axios
+        await axios
             .post(`/api_comment/` +id, data)
             .then((res) => {
                 alert('코멘트 등록 완료!');
@@ -79,6 +90,7 @@ const postApi = {
                 alert('에러 발생!');
             });
     },
+    
     deleteComment:  async (id) => {
         await axios.delete(`/api_comment/`+ id)
         .then((res) => {

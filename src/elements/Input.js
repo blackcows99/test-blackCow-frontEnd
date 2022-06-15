@@ -1,17 +1,18 @@
 import styled from "styled-components";
 import { useRef } from "react";
 const Input = (props) => {
+    
     const {
         label,
         type,
         placeholder,
         _onChange,
         defaultValue,
-
         margin,
         width,
+        value,
     } = props;
-
+    console.log(value)
     const styles = {
         label,
         margin,
@@ -24,11 +25,11 @@ const Input = (props) => {
             <InputBox 
             // {...styles}
                 type={type}
-                defaultValue={defaultValue}
+                // defaultValue={defaultValue}
                 placeholder={placeholder}
                 onChange={_onChange}
                 style={{width}}
-                // value={value}
+                value={value}
             ></InputBox>
     )
 }
@@ -41,6 +42,7 @@ Input.defaultProps = {
     margin: false,
     width: false,
     defaultValue:'',
+    value:'',
   };
 //   `width: ${props.width};`
 const InputBox = styled.input`

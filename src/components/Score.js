@@ -4,23 +4,7 @@ import { BsStarFill } from 'react-icons/bs';
 const Score = ({score, _onClick}) => {
     const [hovered, setHovered] = useState(null);
     const [clicked, setClicked] = useState(null);
-    const [mode, setMode] = useState(false);
-    const goToFetch = e => {
-        setClicked(e.target.id);
-        fetch(`http://10.58.3.24:8000/products/1`, {
-            //사용할 http 메소드 
-            method: 'POST',
-            //토큰
-            headers: {
-                Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.loTjeBWZ9SeXV-BcIxqOtX37AN30ROvsZl0_udeeRJU',
-            },
-            //서버에 보낼 데이터 (별점)
-            body: JSON.stringify({
-                rating: e.target.id,
-            }),
-        });
-    };
-
+    
     return (
         <ReviewBox>
             <StarContainer>

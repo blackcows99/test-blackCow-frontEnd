@@ -10,14 +10,13 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../shared/firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createPostFB } from '../redux/modules/post';
-
-
+import { createPostFB, updatePostFB } from '../redux/modules/post';
+import { useParams } from 'react-router-dom';
 const Form = ({ mode }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { id } = useParams();
     const user = useSelector(state => state.user);
-
     const fileInput = useRef();
     const [fileName, setFileName] = useState("");
     const [fileImage, setFileImage] = useState("");
@@ -27,8 +26,6 @@ const Form = ({ mode }) => {
     const [areaText, setAreaText] = useState("");
     const [commercial, setCommercial] = useState(null);
     const [_data, setData] = useState("");
-
-
     const getData = async () => {
         let data;
         let file_url;
@@ -43,7 +40,10 @@ const Form = ({ mode }) => {
         data = {
             device: inputText ? inputText : commercial?.device,
             contents: areaText ? areaText : commercial?.contents,
-            category: selected ? selected : commercial?.category,
+            category:
+            mode === "add" ? (selected ? selected 
+            : commercial?.category ? commercial?.category : 1 )
+            : selected ? selected : 1,
             score: rating ? rating : commercial?.score,
             img: file_url ? file_url : commercial?.img,
             // member: user[0].name,
@@ -54,93 +54,32 @@ const Form = ({ mode }) => {
     
     const addClick = () => {
         getData().then(res => {
+            console.log(res)
             // postApi.addPost(res)
             dispatch(createPostFB(res));
+            
             navigate(-1);
         });
     }
       const updateClick = () => {
           getData().then(res=>{
               console.log(res)
-              postApi.updatePost(commercial.id,res);
-            // dispatch(updateCommercial(_data));  
-              navigate("/");
+            dispatch(updatePostFB(id, res));
+        //   postApi.updatePost(commercial.id,res);
+        // dispatch(updateCommercial(_data));  
+          navigate("/");
           });
-
-
     }
 
-    // const addPost = async () => {
-    //     const file = fileInput.current.files[0];  // 복잡한 파일 담겨있음 변환 필요
-    //     if (!(inputText && areaText &&
-    //         selected && rating &&file)) {
-    //       alert("모든 항목을 다 입력해주세요.");
-    //       return;
-    //     }
-
-    //     const data = {
-    //         device: inputText,
-    //         contents: areaText,
-    //         category: selected,
-    //         score: rating,
-    //     }
-
-    //     const uploaded_file = await uploadBytes(
-    //         ref(storage, `images/${file.name}`),// 파일이름
-    //         file                                   //  파일
-    //     );
-    //     // ref로 다운로드url에 씀
-    //     const file_url = await getDownloadURL(uploaded_file.ref);
-
-    //     const real_data = {
-    //         device: data.device,
-    //         contents: data.contents,
-    //         category: data.category,
-    //         score: data.score,
-    //         img: file_url,
-    //     }
-    //     console.log(real_data)
-    //     postApi.addPost(real_data);
-    //     navigate(-1);
-    //                    // 서버에 보내기
-    // };
-
-    // const updatePost = async () => {
-    //     const data = {
-    //         device: inputText ? inputText : commercial?.device,
-    //         contents: areaText ? areaText : commercial?.contents,
-    //         category: selected ? selected : commercial?.category,
-    //         score: rating ? rating : commercial?.score,
-    //     }
-    //     let file_url;
-    //     if (fileInput.current.files[0]) {
-    //         const file = fileInput.current.files[0];             // 복잡한 파일 담겨있음 변환 필요
-    //         const uploaded_file = await uploadBytes(
-    //             ref(storage, `images/${file.name}`),// 파일이름
-    //             file                                    //  파일
-    //         );                                          // ref로 다운로드url에 씀
-    //         file_url = await getDownloadURL(uploaded_file.ref);
-    //     }
-
-    //     const real_data = {
-    //         device: data.device,
-    //         contents: data.contents,
-    //         category: data.category,
-    //         score: data.score,
-    //         img: file_url? file_url : commercial.img,
-    //     }
-    //     console.log(real_data)
-    //     postApi.updatePost(commercial.id,real_data);                // 서버에 보내기
-    //     navigate("/");
-    // };
-
     const call = async () => {
-        const data = await postApi.loadOnePost(1);
+        const data = await postApi.loadOnePost(id);
         setCommercial(data)
     }
 
     React.useEffect(() => {
-        if (mode === "update") call();
+        if (mode === "update") {
+            call();
+        }
     }, [])
 
 
@@ -157,6 +96,7 @@ const Form = ({ mode }) => {
         setSelected(e.target.value);
     }
 
+   
 
 
     return (
@@ -188,15 +128,14 @@ const Form = ({ mode }) => {
                     : (fileImage ? fileImage : commercial?.img)}>
                 </Image>
                 <Title text="평점을 선택해주세요."></Title>
-                <Score
-                    // score={ commercial?.score } 
-                    _onClick={onClickScore} />
+                <Score _onClick={ onClickScore }/>
             </div>
             <Title text="내용을 입력해주세요"></Title><br />
             <Input
                 placeholder="제품명을 입력해주세요."
                 width="50%"
-                defaultValue={mode === "add" ? "" : commercial?.device}
+                // defaultValue={mode === "add" ? "" : commercial?.device}
+                value ={mode === "add" ? null: ( inputText ? inputText : commercial?.device) }
                 _onChange={(e) => { setInputText(e.target.value) }}
             />
             <Select
