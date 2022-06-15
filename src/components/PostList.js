@@ -12,10 +12,11 @@ import { loadWordFB } from '../redux/modules/post';
 
 const PostList = (props) => {
   const navigate = useNavigate();
-  const postList = useSelector( state => state.post.list);
-  console.log(postList)
+
+  const postList = useSelector((state) => state.post.list);
+  console.log(postList);
+
   const [star, setStar] = React.useState([0, 1, 2, 3, 4]);
-  // const [postData, setPostData] = React.useState([]);
   const [category, setCategory] = React.useState([
     '컴퓨터',
     '노트북',
@@ -23,6 +24,7 @@ const PostList = (props) => {
     '가전제품',
     '기타',
   ]);
+  // const [postData, setPostData] = React.useState([]);
 
   const dispatch = useDispatch();
 
@@ -34,8 +36,6 @@ const PostList = (props) => {
   //   // console.log(data);
   //   // return setPostData(data);
   // };
-
-
 
   useEffect(() => {
     // test();
@@ -174,15 +174,30 @@ const Contents = styled.div`
 
   & h4 {
     width: 100%;
+    height: 25px;
     margin: 10px 0;
     font-size: 20px;
     font-weight: bold;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   & p {
     width: 100%;
+    height: 50px;
+
     margin: 3px 0;
     font-size: 17px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2; // 원하는 라인수
+    -webkit-box-orient: vertical;
   }
 `;
 
