@@ -18,7 +18,7 @@ export function deleteUser(user) {
 
 export const loadUserFB = () => {
   return async function (dispatch, getState) {
-    let user
+    let user;
     await authApi.authCheck().then((response) => {
       console.log(response.data);
       user = response.data;
