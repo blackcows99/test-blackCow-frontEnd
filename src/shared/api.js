@@ -79,15 +79,9 @@ const postApi = {
     },
 
     addComment: async (id, data) => {
-        console.log(id, data)
-        await axios
+        return await axios
             .post(`/api/comment/` +id, data)
-            .then((res) => {
-                alert('코멘트 등록 완료!');
-            })
-            .catch((error) => {
-                alert('에러 발생!');
-            });
+
     },
     
     deleteComment:  async (id) => {

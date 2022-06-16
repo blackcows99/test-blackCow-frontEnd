@@ -13,7 +13,7 @@ const Detail = ({ data }) => {
     const comments = useSelector(state => state.comment.list);
     const { id } = useParams();
     const navigate = useNavigate();
-    const [commercial, setCommercial] = useState(null);
+    const [commercial, setCommercial] = useState({});
     // const [comments, setComments] = useState([]);
     const [content, setContent] = useState('');
     const [auth, setAuth] = useState(false);
@@ -63,6 +63,7 @@ const Detail = ({ data }) => {
         // authCheck()
     }, [])
 
+    console.log(commercial);
     return (
         <>  <div style={{ margin: "70px auto 0 auto" }}>
             {/* { commercial.isEditable ? <CustomButton width="10vw" _onClick={() => { navigate(`/update/${commercial?.id}`) }} 
@@ -72,10 +73,10 @@ const Detail = ({ data }) => {
 
             {/* 실전에서 밑에 버튼 지우고 위에꺼 주석풀기 */}
             <CustomButton width="10vw" _onClick={() => { navigate(`/update/${commercial?.id}`) }}
-                style={{ display: auth ? "" : "none" }}
+                editable={commercial?.editable}
             >수정하기</CustomButton>
             <CustomButton width="10vw" _onClick={() => { deleteClick(id); }}
-                style={{ display: auth ? "" : "none" }}
+                          editable={commercial?.editable}
             >삭제하기</CustomButton>
             <CustomButton width="10vw" _onClick={() => { navigate(-1) }}>뒤로가기</CustomButton>
         </div>

@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 
 const CustomButton = (props) => {
-  const { children, _onClick, width, height, margin, _disabled } = props;
+  const { children, _onClick, width, height, margin, _disabled,editable } = props;
 
   const styles = {
     width,
     height,
     margin,
+    editable
   };
   return (
     <Button
-      // {...styles}
+      {...styles}
       onClick={_onClick}
-      style={{ width, height, margin }}
+      style={{ width, height, margin,editable}}
       disabled={_disabled}
     >
       {children}
@@ -28,6 +29,7 @@ CustomButton.defaultProps = {
   width: false,
   height: false,
   margin: false,
+  editable:true
 };
 
 const Button = styled.button`
@@ -40,8 +42,9 @@ const Button = styled.button`
   cursor: pointer;
   transition: 0.3s;
   text-align: center;
-
+  
   ${(props) => (props.width ? `width: ${props.width};` : '100%')};
+  ${(props) => (!props.editable ? `display: none;` : "")};
   ${(props) => (props.height ? `height: ${props.height};` : null)};
   ${(props) => (props.margin ? `margin: ${props.margin};` : null)};
   &:hover {

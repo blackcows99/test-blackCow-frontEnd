@@ -32,7 +32,17 @@ export function addComment(comment) {
 
 export const addCommentFB = (id, comment) => {
     return async function (dispatch) {
-        const comments = await postApi.addComment(id, comment);     // 실전에서 풀기
+        let comments
+        await postApi.addComment(id, comment)
+            .then((response) => {
+                console.log(response);
+                alert('코멘트 등록 완료!');
+                comments = response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+                alert('에러 발생!');
+            });;    // 실전에서 풀기
         // const comments = RESP.COMMENTS[0];  // 테스트 코드
         console.log(comments);
         dispatch(addComment(comments))
