@@ -22,13 +22,16 @@ const Header = () => {
     navigate('/login');
   };
 
-  const signOut = () => {
-    // instance.get('/logout').then((res) => {
-    removeCookie("member")
-    dispatch(deleteUser())
-    navigate('/login');
+  const signOut = async () => {
 
-    // });
+    new Promise(() => {
+      dispatch(deleteUser());
+      removeCookie("member");
+    }).then(() => {
+      navigate('/login');
+    })
+
+
   };
   const setJwtCookie = (token) => {
     const cookies = new Cookies();
@@ -43,10 +46,11 @@ const Header = () => {
   }
   const setToken = () => {
     if (memberParam != null) {
-      setJwtCookie(memberParam);
-      console.log(memberParam);
-
-      navigate('/');
+      new Promise(() => {
+        setJwtCookie(memberParam);
+      }).then(() => {
+        navigate('/');
+      });
     }
   }
   const getMemberInfo = () => {
