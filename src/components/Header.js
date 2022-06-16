@@ -6,7 +6,8 @@ import '../font.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser, loadUserFB } from '../redux/modules/user';
-import { useCookies, Cookies } from "react-cookie";
+import Cookies from "universal-cookie";
+
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,32 +15,35 @@ const Header = () => {
     return new URLSearchParams(window.location.search).get(key);
   };
   let memberParam = getParameter("member");
-
+  const cookies = new Cookies();
   const user = useSelector((state) => state.user);
 
-  const [cookies, setCookie, removeCookie] = useCookies(['member']);
   const signIn = () => {
     navigate('/login');
   };
 
   const signOut = () => {
     axios.get('/logout').then((res) => {
-      removeCookie("member", { path: '/', secure: true, httpOnly: true });
+      removeCookie("member")
       dispatch(deleteUser())
       navigate('/login');
 
     });
   };
-
+  const setJwtCookie = (token) => {
+    let date = new Date();
+    date.setMinutes(date.getMinutes() + 20);
+    cookies.set("member", token, { path: '/', date, secure: true, });
+  }
+  const removeCookie = (name) => {
+    cookies.remove(name, { path: '/', secure: true, httpOnly: true });
+  }
   const setToken = () => {
     if (memberParam != null && cookies.member == undefined) {
-      let date = new Date();
-      date.setMinutes(date.getMinutes() + 20);
-      let cookie = new Cookies();
-      cookie.set("member", memberParam, { path: '/', date, secure: true, })
-      // navigate('/');
+      setJwtCookie(memberParam);
+      navigate('/');
     } else if (user.name == undefined) {
-      removeCookie("member", { path: '/', secure: true, httpOnly: true });
+      removeCookie("member")
       navigate('/');
     }
   }
@@ -49,8 +53,9 @@ const Header = () => {
   };
 
   React.useEffect(() => {
-    getMemberInfo();
     setToken();
+    getMemberInfo();
+
   }, []);
 
   return (
