@@ -59,7 +59,15 @@ const Header = () => {
   };
 
   React.useEffect(() => {
-    setToken();
+    React.useEffect(() => {
+      new Promise(()=>{
+        setToken();
+      }).then(()=>{
+
+        getMemberInfo();
+      })
+
+    }, []);
   }, [])
 
 
