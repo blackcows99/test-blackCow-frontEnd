@@ -5,9 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../font.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadUser, loadUserFB } from '../redux/modules/user';
-import {useCookies,Cookies} from "react-cookie";
-import { authApi } from '../shared/api';
+import { deleteUser, loadUserFB } from '../redux/modules/user';
+import { useCookies, Cookies } from "react-cookie";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,44 +17,35 @@ const Header = () => {
 
   const user = useSelector((state) => state.user);
 
-  const [member, setMemeber] = React.useState({});
-  const [cookies,setCookie,removeCookie ] = useCookies(['member']);
+  const [cookies, setCookie, removeCookie] = useCookies(['member']);
   const signIn = () => {
     navigate('/login');
   };
 
   const signOut = () => {
-    // navigate('/login');
-    removeCookie("member",{path:'/',secure:true,httpOnly:true});
     axios.get('/logout').then((res) => {
-      setMemeber({});
+      removeCookie("member", { path: '/', secure: true, httpOnly: true });
+      dispatch(deleteUser())
       navigate('/login');
+
     });
   };
 
-  const signUp = () => {
-    navigate('/sign_up');
-  };
-  const setToken=()=>{
-      if(memberParam != null && cookies.member == undefined){
-        let date = new Date();
-          date.setMinutes(date.getMinutes()+20);
-          let cookie = new Cookies();
-          cookie.set("member", memberParam, {path: '/',date, secure: true, })
-        navigate('/');
-      }else if(user.name==undefined){
-        removeCookie("member",{path:'/',secure:true,httpOnly:true});
-        navigate('/');
-      }
+  const setToken = () => {
+    if (memberParam != null && cookies.member == undefined) {
+      let date = new Date();
+      date.setMinutes(date.getMinutes() + 20);
+      let cookie = new Cookies();
+      cookie.set("member", memberParam, { path: '/', date, secure: true, })
+      navigate('/');
+    } else if (user.name == undefined) {
+      removeCookie("member", { path: '/', secure: true, httpOnly: true });
+      navigate('/');
+    }
   }
   const getMemberInfo = async () => {
     dispatch(loadUserFB());
-    // authApi.authCheck((response) => {
-    //   setMemeber(response.data);
-    // },(error) => {
-    //   console.log(error);
-    //   setMemeber({});
-    // })
+
   };
 
   React.useEffect(() => {
@@ -77,9 +67,6 @@ const Header = () => {
         <button onClick={signIn} style={{ display: user.name == undefined ? '' : 'none' }}>
           로그인
         </button>
-        {/* <button onClick={signUp} style={{ display: user.name == undefined ? '' : 'none' }}>
-          회원가입
-        </button> */}
         <button onClick={signOut} style={{ display: user.name != undefined ? '' : 'none' }}>
           로그아웃
         </button>

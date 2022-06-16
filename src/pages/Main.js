@@ -4,34 +4,18 @@ import styled from 'styled-components';
 import PostList from '../components/PostList';
 import CreateIcon from '@mui/icons-material/Create';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { authApi } from '../shared/api';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loadUserFB } from '../redux/modules/user';
 const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [auth, setAuth] = React.useState(false);
   const user = useSelector((state) => state.user);
 
   // 탭 메뉴 구현 부분
   const [activeIndex, setActiveIndex] = React.useState(0);
-  // const focus = useIsFocused();
-  // const authCheck=()=>{
-  //   authApi.authCheck((res)=>{
-  //     setAuth(true);
-  //   },(error)=>{
-  //     setAuth(false);
-  //   })
-  // }
+
   const getMemberInfo = async () => {
     dispatch(loadUserFB());
-    // authApi.authCheck((response) => {
-    //   setMemeber(response.data);
-    // },(error) => {
-    //   console.log(error);
-    //   setMemeber({});
-    // })
   };
 
   React.useEffect(() => {
@@ -133,13 +117,6 @@ const Main = () => {
       >
         <CreateIcon style={{ color: '#ffd5d5' }} />
       </WriteBtn>
-      {/* <WriteBtn
-        onClick={() => {
-          navigate('/add');
-        }}
-      >
-        <CreateIcon style={{ color: '#ffd5d5' }} />
-      </WriteBtn> */}
     </Container>
   );
 };

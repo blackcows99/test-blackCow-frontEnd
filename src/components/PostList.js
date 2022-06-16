@@ -19,9 +19,7 @@ const PostList = (props) => {
   ]);
 
   const postList = useSelector((state) => state.post.list);
-  console.log(postList)
   useEffect(() => {
-    // test();
     setTimeout(() => {
       dispatch(loadPostFB());
     }, 500)

@@ -3,11 +3,10 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Input, CustomButton, MyContainer } from '../elements';
 import { deleteCommentFB } from '../redux/modules/comment';
-const TabContent = ({ data, onClick, content, setContent, auth }) => {
+const TabContent = ({ data, onClick, content, setContent }) => {
   const [fade, setFade] = useState('');
   const [tab, setTab] = useState(false);
   const dispatch = useDispatch();
-
   React.useEffect(() => {
     const a = setTimeout(() => {
       setFade('end');
@@ -20,7 +19,6 @@ const TabContent = ({ data, onClick, content, setContent, auth }) => {
   const clickTab = () => {
     setTab(!tab);
   };
-  // console.log(data)
 
   const deleteComment = (id) => {
     dispatch(deleteCommentFB(id));
@@ -44,15 +42,7 @@ const TabContent = ({ data, onClick, content, setContent, auth }) => {
 
           {data?.map((d, i) => {
             return (
-              // <div
-              //     key={i}
-              //     style={{
-              //         display: "flex",
-              //         textAlign: "center",
-              //         alignItems:"center",
-              //         border:"1px solid black",
-              //         padding:"5px"
-              //     }}>
+
               <MyContainer key={i} is_flex padding='10px'>
                 <span>{d.member}</span>
                 <div style={{ width: '50%', wordBreak: 'break-all' }}>{d.comment}</div>
@@ -70,7 +60,6 @@ const TabContent = ({ data, onClick, content, setContent, auth }) => {
                   ) : null}
                 </div>
               </MyContainer>
-              // </div>)
             );
           })}
         </>

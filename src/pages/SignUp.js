@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { MyContainer, Input, CustomButton, Image } from '../elements';
-import {authApi} from '../shared/api';
+import { authApi } from '../shared/api';
 const SignUp = () => {
-    const navigate = useNavigate();
     const regExpId = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
     const regExpPw = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;
     const [id, setId] = useState('');
@@ -31,7 +30,6 @@ const SignUp = () => {
         }
         const data = { id, nick };
         authApi.signup(data);
-        // navigate("/login");
     }
     return (
         <>

@@ -1,6 +1,4 @@
-import axios from "axios";
 import { postApi } from "../../shared/api";
-import RESP from "../../shared/response";
 
 // Actions
 const LOAD = 'comment/LOAD';
@@ -42,8 +40,7 @@ export const addCommentFB = (id, comment) => {
             .catch((error) => {
                 console.log(error);
                 alert(error.response.data);
-            });;    // 실전에서 풀기
-        // const comments = RESP.COMMENTS[0];  // 테스트 코드
+            });;
         console.log(comments);
         dispatch(addComment(comments))
     }
@@ -76,7 +73,7 @@ export default function reducer(state = initialState, action = {}) {
             console.log(action.id)
             const new_comment_list = state.list.filter((c) => {
                 console.log(c.id)
-                return parseInt(action.id) !== parseInt(c.id); //  실전에선 c.id 의 parseInt 뺴기
+                return parseInt(action.id) !== parseInt(c.id);
             });
             console.log(new_comment_list)
             console.log({ list: new_comment_list })

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { postApi } from '../../shared/api';
 
 // Actions
@@ -16,7 +15,7 @@ const initialState = {
 
 
 export function loadPost(posts) {
-  return { type: LOAD, posts };
+    return { type: LOAD, posts };
 }
 export function createPost(post) {
     return { type: CREATE, post };
@@ -46,8 +45,7 @@ export const createPostFB = (post) => {
 }
 export const updatePostFB = (id, post) => {
     return async function (dispatch, getState) {
-        // console.log(getState().post.list)
-        postApi.updatePost(id, post)        // 실전에서 주석 풀기
+        postApi.updatePost(id, post)
         dispatch(updatePost(id, post))
 
     }
@@ -56,9 +54,10 @@ export const updatePostFB = (id, post) => {
 export const deletePostFB = (id) => {
     return async function (dispatch, getState) {
         console.log(id);
-        postApi.deletePost(id);        // 실전에서 주석 풀기
+        postApi.deletePost(id);
         dispatch(deletePost(id))
-    }}
+    }
+}
 
 // Reducer                                   
 export default function reducer(state = initialState, action = {}) {
@@ -94,6 +93,6 @@ export default function reducer(state = initialState, action = {}) {
             return { list: new_post_list };
         }
         default: return state;
-    } 
-  }
+    }
+}
 
