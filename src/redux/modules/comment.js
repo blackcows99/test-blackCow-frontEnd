@@ -38,14 +38,15 @@ export const addCommentFB = (id, comment) => {
                 console.log(response);
                 alert('코멘트 등록 완료!');
                 comments = response.data;
+                console.log(comments);
+                dispatch(addComment(comments))
             })
             .catch((error) => {
                 console.log(error);
                 alert(error.response.data);
             });;    // 실전에서 풀기
         // const comments = RESP.COMMENTS[0];  // 테스트 코드
-        console.log(comments);
-        dispatch(addComment(comments))
+
     }
 }
 
