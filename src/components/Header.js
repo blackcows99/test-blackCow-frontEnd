@@ -22,13 +22,16 @@ const Header = () => {
     navigate('/login');
   };
 
-  const signOut = () => {
-    axios.get('/logout').then((res) => {
-      removeCookie("member")
-      dispatch(deleteUser())
-      navigate('/login');
+  const signOut = async () => {
 
-    });
+      new Promise(()=>{
+        dispatch(deleteUser());
+        removeCookie("member");
+      }).then(()=>{
+        navigate('/login');
+      })
+
+
   };
   const setJwtCookie = (token) => {
     let date = new Date();
@@ -39,12 +42,12 @@ const Header = () => {
     cookies.remove(name, { path: '/', secure: true, httpOnly: true });
   }
   const setToken = () => {
-    if (memberParam != null && cookies.member == undefined) {
-      setJwtCookie(memberParam);
-      navigate('/');
-    } else if (user.name == undefined) {
-      removeCookie("member")
-      navigate('/');
+    if (memberParam != null) {
+      new Promise(()=>{
+        setJwtCookie(memberParam);
+      }).then(()=>{
+        navigate('/');
+      });
     }
   }
   const getMemberInfo = async () => {
