@@ -10,24 +10,24 @@ import { loadComment, addCommentFB } from '../redux/modules/comment';
 import { deletePostFB } from '../redux/modules/post';
 const Detail = ({ data }) => {
     const dispatch = useDispatch();
-    const comments = useSelector( state => state.comment.list);
+    const comments = useSelector(state => state.comment.list);
     const { id } = useParams();
     const navigate = useNavigate();
     const [commercial, setCommercial] = useState(null);
     // const [comments, setComments] = useState([]);
-    const [content,setContent] = useState('');
+    const [content, setContent] = useState('');
     const [auth, setAuth] = useState(false);
 
 
 
-    
+
 
     const authCheck = async () => {
         authApi.authCheck(response => {
             setAuth(true)
-          },(error) => {
+        }, (error) => {
             console.log(error);
-          })
+        })
     }
 
     // handleClick 관련 테스트 코드 ////////
@@ -38,7 +38,7 @@ const Detail = ({ data }) => {
             comment: content,
             // name: user.name,
         }
-        if ( !content ){
+        if (!content) {
             alert('댓글을 입력하세요!')
             return;
         }
@@ -47,7 +47,6 @@ const Detail = ({ data }) => {
         // call();
     }
 
-<<<<<<< HEAD
     const deleteClick = (id) => {
         dispatch(deletePostFB(id));
         navigate(-1);
@@ -61,31 +60,25 @@ const Detail = ({ data }) => {
     }
     React.useEffect(() => {
         call();
-        authCheck()
+        // authCheck()
     }, [])
 
     return (
-        <>  <div style={{ margin:"70px auto 0 auto"}}>
+        <>  <div style={{ margin: "70px auto 0 auto" }}>
             {/* { commercial.isEditable ? <CustomButton width="10vw" _onClick={() => { navigate(`/update/${commercial?.id}`) }} 
-=======
-  return (
-    <div>
-      <div style={{ margin: '100px auto 0 auto' }}>
-        {/* { commercial.isEditable ? <CustomButton width="10vw" _onClick={() => { navigate(`/update/${commercial?.id}`) }} 
->>>>>>> 54e238bbf885cfcda207b068f2d63a92a2ede80e
                 style={{display : auth ? "" : "none"}}
             >수정하기</CustomButton> : null} */}
-            
+
 
             {/* 실전에서 밑에 버튼 지우고 위에꺼 주석풀기 */}
-            <CustomButton width="10vw" _onClick={() => { navigate(`/update/${commercial?.id}`) }} 
-                style={{display : auth ? "" : "none"}}
+            <CustomButton width="10vw" _onClick={() => { navigate(`/update/${commercial?.id}`) }}
+                style={{ display: auth ? "" : "none" }}
             >수정하기</CustomButton>
-            <CustomButton width="10vw" _onClick={() => { deleteClick(id);}} 
-                style={{display : auth ? "" : "none"}}
+            <CustomButton width="10vw" _onClick={() => { deleteClick(id); }}
+                style={{ display: auth ? "" : "none" }}
             >삭제하기</CustomButton>
-            <CustomButton width="10vw"_onClick={() => { navigate(-1) }}>뒤로가기</CustomButton>
-            </div>
+            <CustomButton width="10vw" _onClick={() => { navigate(-1) }}>뒤로가기</CustomButton>
+        </div>
             <MyContainer width="60vw">
 
                 <TitleBox>
@@ -98,7 +91,7 @@ const Detail = ({ data }) => {
                     <Image src={commercial?.img} width="50%"></Image>
                     <div style={{ padding: "10px" }}>
                         <p><strong style={{ fontSize: "1.1rem" }}>{commercial?.device}</strong></p>
-                        <p style={{wordBreak:"break-all"}} >{commercial?.contents}</p>
+                        <p style={{ wordBreak: "break-all" }} >{commercial?.contents}</p>
                     </div>
                 </ContentBox>
                 <Center>
@@ -120,101 +113,13 @@ const Detail = ({ data }) => {
                         ))}
                     </div>
                 </Center>
-                <TabContent auth={auth} data={comments} postId={id} content={content} setContent={(e)=>setContent(e.target.value)} onClick={()=>handleComment()}  />
+                <TabContent auth={auth} data={comments} postId={id} content={content} setContent={(e) => setContent(e.target.value)} onClick={() => handleComment()} />
                 <SideMenu>상세 페이지</SideMenu>
             </MyContainer>
         </>
     )
 }
 
-<<<<<<< HEAD
-
-=======
-        {/* 실전에서 밑에 버튼 지우고 위에꺼 주석풀기 */}
-        <CustomButton
-          width='10vw'
-          _onClick={() => {
-            navigate(`/update/${commercial?.id}`);
-          }}
-          style={{ display: auth ? '' : 'none' }}
-        >
-          수정하기
-        </CustomButton>
-        <CustomButton
-          margin='0 10px 0 10px'
-          width='10vw'
-          _onClick={() => {
-            deleteClick(id);
-          }}
-          style={{ display: auth ? '' : 'none' }}
-        >
-          삭제하기
-        </CustomButton>
-        <CustomButton
-          width='10vw'
-          _onClick={() => {
-            navigate(-1);
-          }}
-        >
-          뒤로가기
-        </CustomButton>
-      </div>
-
-      <MyContainer className='form-box' width='60vw' margin='10px auto 0 auto'>
-        <TitleBox>
-          <strong>{commercial?.member}</strong>
-
-          <div>{commercial?.date}</div>
-        </TitleBox>
-        <ContentBox>
-          <Image src={commercial?.img} width='50%'></Image>
-          <div style={{ padding: '10px' }}>
-            <p>
-              <strong style={{ fontSize: '1.1rem' }}>{commercial?.device}</strong>
-            </p>
-            <p style={{ wordBreak: 'break-all' }}>{commercial?.contents}</p>
-          </div>
-        </ContentBox>
-        <Center>
-          <div>
-            <Category>
-              {commercial?.category === 1
-                ? '컴퓨터'
-                : commercial?.category === 2
-                ? '노트북'
-                : commercial?.category === 3
-                ? '웨어러블'
-                : commercial?.category === 4
-                ? '가전제품'
-                : commercial?.category === 5
-                ? '기타'
-                : ''}
-            </Category>
-            {[1, 2, 3, 4, 5].map((el) => (
-              <BsStarFill
-                key={el}
-                style={{
-                  fontSize: '30px',
-                  color: `${commercial?.score >= el ? 'yellow' : '#dfdfdf'}`,
-                }}
-              />
-            ))}
-          </div>
-        </Center>
-        <TabContent
-          auth={auth}
-          data={comments}
-          postId={id}
-          content={content}
-          setContent={(e) => setContent(e.target.value)}
-          onClick={() => handleComment()}
-        />
-        <SideMenu>상세 페이지</SideMenu>
-      </MyContainer>
-    </div>
-  );
-};
->>>>>>> 54e238bbf885cfcda207b068f2d63a92a2ede80e
 
 const TitleBox = styled.div`
     display: flex;
@@ -225,7 +130,7 @@ const TitleBox = styled.div`
 const ContentBox = styled.div`
     border:1px solid rgba(108,117,125,0.3);
     display:flex;
-    
+
 `;
 
 const Center = styled.div`
