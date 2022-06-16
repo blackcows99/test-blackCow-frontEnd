@@ -15,7 +15,7 @@ const Header = () => {
     return new URLSearchParams(window.location.search).get(key);
   };
   let memberParam = getParameter("member");
-  const cookies = new Cookies();
+
   const user = useSelector((state) => state.user);
 
   const signIn = () => {
@@ -31,23 +31,27 @@ const Header = () => {
     });
   };
   const setJwtCookie = (token) => {
+    const cookies = new Cookies();
     let date = new Date();
     date.setMinutes(date.getMinutes() + 20);
-    cookies.set("member", token, { path: '/', date, secure: true, });
+    cookies.set("member", token, { path: '/' });
   }
   const removeCookie = (name) => {
-    cookies.remove(name, { path: '/', secure: true, httpOnly: true });
+    const cookies = new Cookies();
+    cookies.remove(name, { path: '/' });
   }
   const setToken = () => {
-    if (memberParam != null && cookies.member == undefined) {
+    if (memberParam != null) {
       setJwtCookie(memberParam);
-      navigate('/');
+      console.log(memberParam);
+
+      // navigate('/');
     } else if (user.name == undefined) {
       removeCookie("member")
-      navigate('/');
+      // navigate('/');
     }
   }
-  const getMemberInfo = async () => {
+  const getMemberInfo = () => {
     dispatch(loadUserFB());
 
   };

@@ -9,7 +9,7 @@ const authApi = {
     },
     authCheck: async (onsuccess, onerror) => {
         return await axios
-            .get('/api/member');
+            .get('/api/member', { withCredentials: true });
 
     }
 
