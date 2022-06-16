@@ -41,7 +41,7 @@ export const addCommentFB = (id, comment) => {
             })
             .catch((error) => {
                 console.log(error);
-                alert('에러 발생!');
+                alert(error.response.data);
             });;    // 실전에서 풀기
         // const comments = RESP.COMMENTS[0];  // 테스트 코드
         console.log(comments);

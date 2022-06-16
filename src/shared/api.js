@@ -30,7 +30,8 @@ const postApi = {
                 return response;
             })
             .catch((err) => {
-                console.log('에러!');
+                console.log(err);
+                alert(err.response.data)
             });
     },
 
@@ -41,7 +42,8 @@ const postApi = {
                 alert('등록 완료!');
             })
             .catch((error) => {
-                alert('에러 발생!');
+                console.log(error);
+                alert(error.response.data);
             });
     },
 
@@ -52,7 +54,8 @@ const postApi = {
                 return res.data;
             })
             .catch((error) => {
-                alert('로드 에러 발생!');
+                console.log(error);
+                alert(error.response.data);
             });
     },
 
@@ -74,7 +77,8 @@ const postApi = {
             alert('post 삭제 완료!');
         })
         .catch((error) => {
-            alert('에러 발생!');
+            console.log(error);
+            alert(error.response.data);
         });
     },
 
@@ -90,7 +94,8 @@ const postApi = {
             alert('코멘트 삭제 완료!');
         })
         .catch((error) => {
-            alert('에러 발생!');
+            console.log(error);
+            alert(error.response.data);
         });
     }
 
