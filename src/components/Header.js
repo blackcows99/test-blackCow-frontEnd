@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser, loadUserFB } from '../redux/modules/user';
 import Cookies from "universal-cookie";
-
+import instance from '../shared/AxiosRequest';
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,24 +17,25 @@ const Header = () => {
   let memberParam = getParameter("member");
 
   const user = useSelector((state) => state.user);
-
+  console.log(user)
   const signIn = () => {
     navigate('/login');
   };
 
   const signOut = () => {
-    axios.get('/logout').then((res) => {
-      removeCookie("member")
-      dispatch(deleteUser())
-      navigate('/login');
+    // instance.get('/logout').then((res) => {
+    removeCookie("member")
+    dispatch(deleteUser())
+    navigate('/login');
 
-    });
+    // });
   };
   const setJwtCookie = (token) => {
     const cookies = new Cookies();
     let date = new Date();
     date.setMinutes(date.getMinutes() + 20);
     cookies.set("member", token, { path: '/' });
+    getMemberInfo();
   }
   const removeCookie = (name) => {
     const cookies = new Cookies();
@@ -45,10 +46,7 @@ const Header = () => {
       setJwtCookie(memberParam);
       console.log(memberParam);
 
-      // navigate('/');
-    } else if (user.name == undefined) {
-      removeCookie("member")
-      // navigate('/');
+      navigate('/');
     }
   }
   const getMemberInfo = () => {
@@ -58,9 +56,9 @@ const Header = () => {
 
   React.useEffect(() => {
     setToken();
-    getMemberInfo();
+  }, [])
 
-  }, []);
+
 
   return (
     <Container>

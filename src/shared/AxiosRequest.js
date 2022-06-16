@@ -3,7 +3,7 @@ import Cookies from "universal-cookie";
 
 
 const instance = axios.create({
-    baseURL: 'https://idontcare.shop',
+    baseURL: 'http://idontcare.shop',
 });
 const cookie = new Cookies();
 instance.defaults.headers.common["Authorization"] = 'Bearer ' + cookie.get('member');

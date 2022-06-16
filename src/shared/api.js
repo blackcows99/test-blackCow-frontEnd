@@ -9,7 +9,7 @@ const authApi = {
         console.log(RESP.LOGIN.user);
     },
     authCheck: async (onsuccess, onerror) => {
-        return await axios
+        return await instance
             .get('/api/member', { withCredentials: true });
 
     }

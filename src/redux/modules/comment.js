@@ -42,9 +42,7 @@ export const addCommentFB = (id, comment) => {
             .catch((error) => {
                 console.log(error);
                 alert(error.response.data);
-            });;
-        console.log(comments);
-        dispatch(addComment(comments))
+            });
     }
 }
 
