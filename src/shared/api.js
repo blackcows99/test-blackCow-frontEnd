@@ -1,5 +1,6 @@
 import RESP from './response';
 import axios from 'axios';
+import instance from "./AxiosRequest";
 
 const authApi = {
     signup: (data) => {
@@ -8,7 +9,7 @@ const authApi = {
         console.log(RESP.LOGIN.user);
     },
     authCheck: async (onsuccess, onerror) => {
-        return await axios
+        return await instance
             .get('/api/member');
 
     }
@@ -17,7 +18,7 @@ const authApi = {
 
 const postApi = {
     loadPost: async () => {
-        return await axios
+        return await instance
             .get('/api/posts')
             .then((response) => {
                 console.log(response.data);
@@ -30,7 +31,7 @@ const postApi = {
     },
 
     addPost: async (data) => {
-        await axios
+        await instance
             .post('/api/post', data)
             .then((res) => {
                 alert('등록 완료!');
@@ -42,7 +43,7 @@ const postApi = {
     },
 
     loadOnePost: async (id) => {
-        return await axios
+        return await instance
             .get(`/api/post/${id}`)
             .then((res) => {
                 return res.data;
@@ -55,7 +56,7 @@ const postApi = {
 
 
     updatePost: async (id, data) => {
-        await axios
+        await instance
             .patch(`/api/post/` + id, data)
             .then((res) => {
                 alert('업데이트 완료!');
@@ -66,7 +67,7 @@ const postApi = {
     },
 
     deletePost: async (id) => {
-        await axios.delete(`/api/post/` + id)
+        await instance.delete(`/api/post/` + id)
             .then((res) => {
                 alert('post 삭제 완료!');
             })
@@ -77,13 +78,13 @@ const postApi = {
     },
 
     addComment: async (id, data) => {
-        return await axios
+        return await instance
             .post(`/api/comment/` + id, data)
 
     },
 
     deleteComment: async (id) => {
-        await axios.delete(`/api/comment/` + id)
+        await instance.delete(`/api/comment/` + id)
             .then((res) => {
                 alert('코멘트 삭제 완료!');
             })
