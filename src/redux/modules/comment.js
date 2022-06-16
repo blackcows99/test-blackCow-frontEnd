@@ -8,7 +8,7 @@ const DELETE = 'comment/DELETE';
 const ADD = 'comment/ADD';
 const initialState = {
     list: [
-        
+
     ],
 };
 
@@ -16,8 +16,8 @@ const initialState = {
 export function loadComment(comments) {
     return { type: LOAD, comments };
 }
-export function deleteComment(id) {   
-    return { type: DELETE, id };   
+export function deleteComment(id) {
+    return { type: DELETE, id };
 }
 
 // 미들웨어 Action Creators
@@ -31,9 +31,10 @@ export function addComment(comment) {
 
 
 export const addCommentFB = (id, comment) => {
-    return async function (dispatch) {  
+    return async function (dispatch) {
         const comments = await postApi.addComment(id, comment);     // 실전에서 풀기
         // const comments = RESP.COMMENTS[0];  // 테스트 코드
+        console.log(comments);
         dispatch(addComment(comments))
     }
 }
@@ -48,19 +49,19 @@ export const deleteCommentFB = (id) => {
 }
 
 // Reducer                        
-export default function reducer(state = initialState, action = {}) { 
+export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
         case "comment/LOAD": {
             return { list: action.comments }
         }
-  
+
         case "comment/ADD": {
-            if ( state.list )
-                return { list: [...state.list, action.comment] }; 
+            if (state.list)
+                return { list: [...state.list, action.comment] };
             else
-                return { list: [ action.comment] }; 
+                return { list: [action.comment] };
         }
-  
+
         case "comment/DELETE": {
             console.log(action.id)
             const new_comment_list = state.list.filter((c) => {

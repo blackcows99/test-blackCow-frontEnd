@@ -25,7 +25,7 @@ const TabContent = ({ data, onClick, content, setContent, auth }) => {
   const deleteComment = (id) => {
     dispatch(deleteCommentFB(id));
   };
-
+  console.log(data);
   return (
     <div className={`start ${fade}`}>
       <Span onClick={clickTab}>댓글</Span>

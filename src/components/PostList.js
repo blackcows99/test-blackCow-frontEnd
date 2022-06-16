@@ -19,10 +19,13 @@ const PostList = (props) => {
   ]);
 
   const postList = useSelector((state) => state.post.list);
-
+  console.log(postList)
   useEffect(() => {
     // test();
-    dispatch(loadPostFB());
+    setTimeout(() => {
+      dispatch(loadPostFB());
+    }, 500)
+
   }, [dispatch]);
 
   // 탭 버튼 클릭에 따른 데이터
