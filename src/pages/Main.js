@@ -125,21 +125,21 @@ const Main = () => {
         })}
       </TabMenu>
       <div>{tabArr[activeIndex].tabContent}</div>
-      {/* <WriteBtn
-        onClick={() => {
-          navigate('/add');
-        }}
-        style={{display:user.name?'':'none'}}
-      >
-        <CreateIcon style={{ color: '#ffd5d5' }} />
-      </WriteBtn> */}
       <WriteBtn
         onClick={() => {
           navigate('/add');
         }}
+        style={{ display: user.name ? '' : 'none' }}
       >
         <CreateIcon style={{ color: '#ffd5d5' }} />
       </WriteBtn>
+      {/* <WriteBtn
+        onClick={() => {
+          navigate('/add');
+        }}
+      >
+        <CreateIcon style={{ color: '#ffd5d5' }} />
+      </WriteBtn> */}
     </Container>
   );
 };
