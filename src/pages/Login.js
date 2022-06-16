@@ -36,6 +36,5 @@ const Login = () => {
     </>
   );
 };
->>>>>>> 54e238bbf885cfcda207b068f2d63a92a2ede80e
 
 export default Login;

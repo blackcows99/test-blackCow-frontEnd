@@ -6,21 +6,27 @@ import '../font.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser, loadUserFB } from '../redux/modules/user';
+import {useCookies,Cookies} from "react-cookie";
 import { authApi } from '../shared/api';
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const getParameter = (key) => {
+    return new URLSearchParams(window.location.search).get(key);
+  };
+  let memberParam = getParameter("member");
 
   const user = useSelector((state) => state.user);
 
   const [member, setMemeber] = React.useState({});
-
+  const [cookies,setCookie,removeCookie ] = useCookies(['member']);
   const signIn = () => {
     navigate('/login');
   };
 
   const signOut = () => {
     // navigate('/login');
+    removeCookie("member",{path:'/',secure:true,httpOnly:true});
     axios.get('/logout').then((res) => {
       setMemeber({});
       navigate('/login');
@@ -30,7 +36,14 @@ const Header = () => {
   const signUp = () => {
     navigate('/sign_up');
   };
-
+  const setToken=()=>{
+      if(memberParam != null && cookies.member == undefined){
+        let date = new Date();
+          date.setMinutes(date.getMinutes()+20);
+          let cookie = new Cookies();
+          cookie.set("member", memberParam, {path: '/',date, secure: true, })
+      }
+  }
   const getMemberInfo = async () => {
     dispatch(loadUserFB());
     // authApi.authCheck((response) => {
@@ -43,6 +56,7 @@ const Header = () => {
 
   React.useEffect(() => {
     getMemberInfo();
+    setToken();
   }, []);
 
   return (
