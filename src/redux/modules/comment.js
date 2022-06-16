@@ -36,6 +36,8 @@ export const addCommentFB = (id, comment) => {
                 console.log(response);
                 alert('코멘트 등록 완료!');
                 comments = response.data;
+                console.log(comments);
+                dispatch(addComment(comments))
             })
             .catch((error) => {
                 console.log(error);
