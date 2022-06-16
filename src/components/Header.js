@@ -42,6 +42,10 @@ const Header = () => {
           date.setMinutes(date.getMinutes()+20);
           let cookie = new Cookies();
           cookie.set("member", memberParam, {path: '/',date, secure: true, })
+        navigate('/');
+      }else if(user.name==undefined){
+        removeCookie("member",{path:'/',secure:true,httpOnly:true});
+        navigate('/');
       }
   }
   const getMemberInfo = async () => {
